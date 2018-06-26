@@ -1,0 +1,24 @@
+Payload:
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:Sign xmlns="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"
+                  xmlns:ns2="http://tempuri.org/"
+                  xmlns:ns3="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS"
+                  xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+                  xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/"
+                  xmlns:ns6="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums">
+            <ns2:entry>
+                <Attachments/>
+                <DocumentInfo>doc info</DocumentInfo>
+                <FileName>JAJAJAJAJA</FileName>
+                <RequestInfo>request info</RequestInfo>
+                <UnsignedContent>
+                    PHVzbHVnb2Rhd2N5IHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiPgo8dXNsdWdvZGF3Y2E+CjxuYXp3YT5hc2RmZ3NkYXNkYXNkPC9uYXp3YT4KPGRhdGFSZWplc3RyYWNqaT4xMjM0NTY8L2RhdGFSZWplc3RyYWNqaT4KPC91c2x1Z29kYXdjYT4KPC91c2x1Z29kYXdjeT4=
+                </UnsignedContent>
+                <UrlCancel>url cancel</UrlCancel>
+                <UrlFail>url fail</UrlFail>
+                <UrlSuccess>url success</UrlSuccess>
+            </ns2:entry>
+        </ns2:Sign>
+    </soap:Body>
+</soap:Envelope>

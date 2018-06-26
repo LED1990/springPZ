@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="SignDocument" targetNamespace="http://tempuri.org/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://tempuri.org/"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+>
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+            <xs:import namespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS"/>
+            <xs:element name="Sign">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="entry" nillable="true" type="q1:EntryToSign"
+                                    xmlns:q1="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SignResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SignResult" nillable="true" type="q2:SignRespond"
+                                    xmlns:q2="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MultiSign">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="entry" nillable="true" type="q3:MultiSignEntry"
+                                    xmlns:q3="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MultiSignResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="MultiSignResult" nillable="true" type="q4:SignRespond"
+                                    xmlns:q4="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetMultiSign">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="egateUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetMultiSignResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetMultiSignResult" nillable="true" type="q5:MultiSignResponse"
+                                    xmlns:q5="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SignPades">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="entry" nillable="true" type="q6:PadesEntryToSign"
+                                    xmlns:q6="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SignPadesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SignPadesResult" nillable="true" type="q7:SignRespond"
+                                    xmlns:q7="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CheckValid">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="eGateUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CheckValidResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CheckValidResult" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetSignature">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="eGateUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetSignatureResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetSignatureResult" nillable="true"
+                                    type="q8:GetSignatureRespond"
+                                    xmlns:q8="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetSignaturePades">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="eGateUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetSignaturePadesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetSignaturePadesResult" nillable="true"
+                                    type="q9:GetPadesSignatureRespond"
+                                    xmlns:q9="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GenerujPoswiadczenie">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="q10:DanePoswiadczenia"
+                                    xmlns:q10="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GenerujPoswiadczenieResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GenerujPoswiadczenieResult" nillable="true"
+                                    type="q11:WygenerowanePoswiadczenie"
+                                    xmlns:q11="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="VerifySignatures">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="q12:VerifySignatureRequest"
+                                    xmlns:q12="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="VerifySignaturesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="VerifySignaturesResult" nillable="true"
+                                    type="q13:VerifySignatureResponse"
+                                    xmlns:q13="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetVerifyResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="egateUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetVerifyResponseResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="GetVerifyResponseResult" nillable="true"
+                                    type="q14:VerifyResponse"
+                                    xmlns:q14="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                   targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+            <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+            <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+            <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+            <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+            <xs:element name="byte" nillable="true" type="xs:byte"/>
+            <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+            <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+            <xs:element name="double" nillable="true" type="xs:double"/>
+            <xs:element name="float" nillable="true" type="xs:float"/>
+            <xs:element name="int" nillable="true" type="xs:int"/>
+            <xs:element name="long" nillable="true" type="xs:long"/>
+            <xs:element name="QName" nillable="true" type="xs:QName"/>
+            <xs:element name="short" nillable="true" type="xs:short"/>
+            <xs:element name="string" nillable="true" type="xs:string"/>
+            <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+            <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+            <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+            <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+            <xs:element name="char" nillable="true" type="tns:char"/>
+            <xs:simpleType name="char">
+                <xs:restriction base="xs:int"/>
+            </xs:simpleType>
+            <xs:element name="duration" nillable="true" type="tns:duration"/>
+            <xs:simpleType name="duration">
+                <xs:restriction base="xs:duration">
+                    <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+                    <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+                    <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="guid" nillable="true" type="tns:guid"/>
+            <xs:simpleType name="guid">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:attribute name="FactoryType" type="xs:QName"/>
+            <xs:attribute name="Id" type="xs:ID"/>
+            <xs:attribute name="Ref" type="xs:IDREF"/>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.SignService">
+            <xs:import namespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums"/>
+            <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:complexType name="EntryToSign">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Attachments" nillable="true" type="tns:ArrayOfAttachment"/>
+                    <xs:element minOccurs="0" name="DocumentInfo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="RequestInfo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UnsignedContent" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="UrlCancel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlFail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlSuccess" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="EntryToSign" nillable="true" type="tns:EntryToSign"/>
+            <xs:complexType name="ArrayOfAttachment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Attachment" nillable="true"
+                                type="tns:Attachment"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfAttachment" nillable="true" type="tns:ArrayOfAttachment"/>
+            <xs:complexType name="Attachment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Attachment" nillable="true" type="tns:Attachment"/>
+            <xs:complexType name="SignRespond">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="SignRespond" nillable="true" type="tns:SignRespond"/>
+            <xs:complexType name="MultiSignEntry">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfMultiSignEntryItem"/>
+                    <xs:element minOccurs="0" name="RequestInfo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlCancel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlFail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlSuccess" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="MultiSignEntryXX" nillable="true" type="tns:MultiSignEntry"/>
+            <xs:complexType name="ArrayOfMultiSignEntryItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="MultiSignEntryItem" nillable="true"
+                                type="tns:MultiSignEntryItem"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfMultiSignEntryItem" nillable="true" type="tns:ArrayOfMultiSignEntryItem"/>
+            <xs:complexType name="MultiSignEntryItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SignatureFormat" nillable="true" type="q1:SignatureFormat"
+                                xmlns:q1="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="MultiSignEntryItem" nillable="true" type="tns:MultiSignEntryItem"/>
+            <xs:complexType name="MultiSignResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfMultiSignEntryItem"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="MultiSignResponse" nillable="true" type="tns:MultiSignResponse"/>
+            <xs:complexType name="PadesEntryToSign">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="DocumentInfo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="RequestInfo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UnsignedContent" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="UrlCancel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlFail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrlSuccess" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="PadesEntryToSign" nillable="true" type="tns:PadesEntryToSign"/>
+            <xs:complexType name="GetSignatureRespond">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SignatureType" type="q2:SignatureType"
+                                xmlns:q2="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums"/>
+                    <xs:element minOccurs="0" name="Signatures" nillable="true" type="tns:ArrayOfSignatureComplex"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="GetSignatureRespond" nillable="true" type="tns:GetSignatureRespond"/>
+            <xs:complexType name="ArrayOfSignatureComplex">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="SignatureComplex" nillable="true"
+                                type="tns:SignatureComplex"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfSignatureComplex" nillable="true" type="tns:ArrayOfSignatureComplex"/>
+            <xs:complexType name="SignatureComplex">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SignatureContent" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="SignatureComplex" nillable="true" type="tns:SignatureComplex"/>
+            <xs:complexType name="GetPadesSignatureRespond">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SignedDocument" nillable="true" type="xs:base64Binary"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="GetPadesSignatureRespond" nillable="true" type="tns:GetPadesSignatureRespond"/>
+            <xs:complexType name="VerifySignatureRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="BackUrl" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfVerifyItem"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifySignatureRequest" nillable="true" type="tns:VerifySignatureRequest"/>
+            <xs:complexType name="ArrayOfVerifyItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="VerifyItem" nillable="true"
+                                type="tns:VerifyItem"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfVerifyItem" nillable="true" type="tns:ArrayOfVerifyItem"/>
+            <xs:complexType name="VerifyItem">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Attachments" nillable="true" type="tns:ArrayOfAttachment"/>
+                    <xs:element minOccurs="0" name="Signature" nillable="true" type="tns:VerifyItemSignature"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifyItem" nillable="true" type="tns:VerifyItem"/>
+            <xs:complexType name="VerifyItemSignature">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifyItemSignatureXX" nillable="true" type="tns:VerifyItemSignature"/>
+            <xs:complexType name="VerifySignatureResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifySignatureResponse" nillable="true" type="tns:VerifySignatureResponse"/>
+            <xs:complexType name="VerifyResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Items" nillable="true"
+                                type="tns:ArrayOfVerifyItemSignatureResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifyResponse" nillable="true" type="tns:VerifyResponse"/>
+            <xs:complexType name="ArrayOfVerifyItemSignatureResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="VerifyItemSignatureResponse" nillable="true"
+                                type="tns:VerifyItemSignatureResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfVerifyItemSignatureResponse" nillable="true"
+                        type="tns:ArrayOfVerifyItemSignatureResponse"/>
+            <xs:complexType name="VerifyItemSignatureResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Errors" nillable="true" type="q3:ArrayOfstring"
+                                xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                    <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="IsValid" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="VerifyItemSignatureResponse" nillable="true" type="tns:VerifyItemSignatureResponse"/>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Domain.Enums">
+            <xs:simpleType name="SignatureFormat">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Xades"/>
+                    <xs:enumeration value="Pades"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="SignatureFormat" nillable="true" type="tns:SignatureFormat"/>
+            <xs:simpleType name="SignatureType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Epuap"/>
+                    <xs:enumeration value="Outside"/>
+                    <xs:enumeration value="Qualified"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="SignatureType" nillable="true" type="tns:SignatureType"/>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.datacontract.org/2004/07/CSIOZ.Egate.Common.WS">
+            <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:complexType name="DanePoswiadczenia">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Adresat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="DataPrzedlozenia" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="Dokument" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="IdentyfikatorPoswiadczenia" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="IdentyfikatorPrzesylki" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Nadawca" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="NazwaSystemu" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="TypPoswiadczenia" type="tns:TypPoswiadczenia"/>
+                    <xs:element minOccurs="0" name="TypPrzesylki" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="DanePoswiadczenia" nillable="true" type="tns:DanePoswiadczenia"/>
+            <xs:simpleType name="TypPoswiadczenia">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="UPP"/>
+                    <xs:enumeration value="UPD"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="TypPoswiadczenia" nillable="true" type="tns:TypPoswiadczenia"/>
+            <xs:complexType name="WygenerowanePoswiadczenie">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="PodpisPoswiadczenia" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="StatusOperacji" nillable="true" type="tns:StatusOperacji"/>
+                    <xs:element minOccurs="0" name="TrescPoswiadczenia" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="TypPoswiadczenia" type="tns:TypPoswiadczenia"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="WygenerowanePoswiadczenie" nillable="true" type="tns:WygenerowanePoswiadczenie"/>
+            <xs:complexType name="StatusOperacji">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Bledy" nillable="true" type="q1:ArrayOfstring"
+                                xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                    <xs:element minOccurs="0" name="CzySukces" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="StatusOperacji" nillable="true" type="tns:StatusOperacji"/>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <xs:complexType name="ArrayOfstring">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="ISign_Sign_InputMessage">
+        <wsdl:part name="parameters" element="tns:Sign"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_Sign_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SignResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_MultiSign_InputMessage">
+        <wsdl:part name="parameters" element="tns:MultiSign"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_MultiSign_OutputMessage">
+        <wsdl:part name="parameters" element="tns:MultiSignResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetMultiSign_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetMultiSign"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetMultiSign_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetMultiSignResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_SignPades_InputMessage">
+        <wsdl:part name="parameters" element="tns:SignPades"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_SignPades_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SignPadesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_CheckValid_InputMessage">
+        <wsdl:part name="parameters" element="tns:CheckValid"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_CheckValid_OutputMessage">
+        <wsdl:part name="parameters" element="tns:CheckValidResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetSignature_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetSignature"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetSignature_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetSignatureResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetSignaturePades_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetSignaturePades"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetSignaturePades_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetSignaturePadesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GenerujPoswiadczenie_InputMessage">
+        <wsdl:part name="parameters" element="tns:GenerujPoswiadczenie"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GenerujPoswiadczenie_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GenerujPoswiadczenieResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_VerifySignatures_InputMessage">
+        <wsdl:part name="parameters" element="tns:VerifySignatures"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_VerifySignatures_OutputMessage">
+        <wsdl:part name="parameters" element="tns:VerifySignaturesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetVerifyResponse_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetVerifyResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ISign_GetVerifyResponse_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetVerifyResponseResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ISign">
+        <wsdl:operation name="Sign">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/Sign" message="tns:ISign_Sign_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/SignResponse" message="tns:ISign_Sign_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="MultiSign">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/MultiSign" message="tns:ISign_MultiSign_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/MultiSignResponse"
+                         message="tns:ISign_MultiSign_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetMultiSign">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/GetMultiSign"
+                        message="tns:ISign_GetMultiSign_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/GetMultiSignResponse"
+                         message="tns:ISign_GetMultiSign_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SignPades">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/SignPades" message="tns:ISign_SignPades_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/SignPadesResponse"
+                         message="tns:ISign_SignPades_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="CheckValid">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/CheckValid" message="tns:ISign_CheckValid_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/CheckValidResponse"
+                         message="tns:ISign_CheckValid_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetSignature">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/GetSignature"
+                        message="tns:ISign_GetSignature_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/GetSignatureResponse"
+                         message="tns:ISign_GetSignature_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetSignaturePades">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/GetSignaturePades"
+                        message="tns:ISign_GetSignaturePades_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/GetSignaturePadesResponse"
+                         message="tns:ISign_GetSignaturePades_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GenerujPoswiadczenie">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/GenerujPoswiadczenie"
+                        message="tns:ISign_GenerujPoswiadczenie_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/GenerujPoswiadczenieResponse"
+                         message="tns:ISign_GenerujPoswiadczenie_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="VerifySignatures">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/VerifySignatures"
+                        message="tns:ISign_VerifySignatures_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/VerifySignaturesResponse"
+                         message="tns:ISign_VerifySignatures_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetVerifyResponse">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISign/GetVerifyResponse"
+                        message="tns:ISign_GetVerifyResponse_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ISign/GetVerifyResponseResponse"
+                         message="tns:ISign_GetVerifyResponse_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BasicHttpBinding_ISign" type="tns:ISign">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Sign">
+            <soap:operation soapAction="http://tempuri.org/ISign/Sign" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MultiSign">
+            <soap:operation soapAction="http://tempuri.org/ISign/MultiSign" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetMultiSign">
+            <soap:operation soapAction="http://tempuri.org/ISign/GetMultiSign" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SignPades">
+            <soap:operation soapAction="http://tempuri.org/ISign/SignPades" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CheckValid">
+            <soap:operation soapAction="http://tempuri.org/ISign/CheckValid" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSignature">
+            <soap:operation soapAction="http://tempuri.org/ISign/GetSignature" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSignaturePades">
+            <soap:operation soapAction="http://tempuri.org/ISign/GetSignaturePades" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GenerujPoswiadczenie">
+            <soap:operation soapAction="http://tempuri.org/ISign/GenerujPoswiadczenie" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="VerifySignatures">
+            <soap:operation soapAction="http://tempuri.org/ISign/VerifySignatures" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetVerifyResponse">
+            <soap:operation soapAction="http://tempuri.org/ISign/GetVerifyResponse" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SignDocument">
+        <wsdl:port name="BasicHttpBinding_ISign" binding="tns:BasicHttpBinding_ISign">
+            <soap:address
+                    location="http://p4services.test.rejestrymedyczne.csioz.gov.pl/eGateSignService/SignDocument.svc"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

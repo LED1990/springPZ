@@ -17,6 +17,9 @@ import java.util.Properties;
 
 import static org.apache.wss4j.common.ConfigurationConstants.SIG_DIGEST_ALGO;
 
+//import static org.apache.ws.security.handler.WSHandlerConstants.SIG_DIGEST_ALGO;
+
+
 @Configuration
 public class PzConfig {
 

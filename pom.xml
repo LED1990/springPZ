@@ -17,6 +17,7 @@
     </parent>
 
     <properties>
+        <cxf-cer>3.1.10</cxf-cer>
         <java.version>1.8</java.version>
         <!--<certificates.truststoreData.path>/config/punktZaufania_CCP1_TEST.jks</certificates.truststoreData.path>-->
         <!--<certificates.truststoreData.type>JKS</certificates.truststoreData.type>-->
@@ -71,19 +72,25 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>3.1.10</version>
+            <version>${cxf-cer}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
-            <version>3.1.10</version>
+            <version>${cxf-cer}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>3.1.10</version>
+            <version>${cxf-cer}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-tools-common</artifactId>
+            <version>${cxf-cer}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
@@ -97,7 +104,7 @@
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
-                <version>2.7.6</version>
+                <version>${cxf-cer}</version>
                 <executions>
                     <execution>
                         <id>generate-sources</id>
@@ -108,11 +115,26 @@
                             <sourceRoot>${basedir}/src/main/java</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>https://int.pz.gov.pl/pz-services/tpSigning?wsdl</wsdl>
+                                    <wsdl>${basedir}/src/main/resources/tpSigning.wsdl</wsdl>
+                                    <wsdlLocation>classpath:tpSigning.wsdl</wsdlLocation>
                                     <extraargs>
                                         <extraarg>-p</extraarg>
                                         <extraarg>pz.klasywsdl</extraarg>
                                     </extraargs>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/egate.wsdl</wsdl>
+                                    <wsdlLocation>classpath:egate.wsdl</wsdlLocation>
+                                    <extraargs>
+                                        <extraarg>-autoNameResolution</extraarg>
+                                        <extraarg>-p</extraarg>
+                                        <extraarg>egate.integracja</extraarg>
+                                    </extraargs>
+                                    <bindingFiles>
+                                        <bindingFile>
+                                            ${basedir}/src/main/resources/egatebindings.xml
+                                        </bindingFile>
+                                    </bindingFiles>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
@@ -121,6 +143,18 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>xerces</groupId>
+                        <artifactId>xercesImpl</artifactId>
+                        <version>2.11.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-xjc-ts</artifactId>
+                        <version>2.2.12</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

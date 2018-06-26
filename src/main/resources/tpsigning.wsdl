@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns2="http://exception.ws.comarch.gov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://signing.ws.comarch.gov" targetNamespace="http://signing.ws.comarch.gov">
+    <wsdl:import location="wssec-policies.wsdl" namespace="http://policies.zp.epuap.gov.pl">
+    </wsdl:import>
+    <wsdl:types>
+        <schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns2="http://exception.ws.comarch.gov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://signing.ws.comarch.gov" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://signing.ws.comarch.gov">
+            <!-- korzystamy z typow prostych -->
+        </schema>
+        <schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns2="http://exception.ws.comarch.gov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://signing.ws.comarch.gov" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://exception.ws.comarch.gov">
+
+            <complexType name="WSSigningException">
+
+                <sequence>
+
+                    <element name="code" nillable="true" type="xsd:string"/>
+
+                    <element name="errMessage" nillable="true" type="xsd:string"/>
+
+                </sequence>
+
+            </complexType>
+
+            <element name="WSSigningException" nillable="true" type="tns2:WSSigningException"/>
+
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="hasTrustedProfileInstitutionRequest">
+        <wsdl:part name="tgsid" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addDocumentToSigningResponse">
+        <wsdl:part name="addDocumentToSigningReturn" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="hasTrustedProfileInstitutionResponse">
+        <wsdl:part name="hasTrustedProfileInstitutionReturn" type="xsd:boolean">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="hasTrustedProfilePersonResponse">
+        <wsdl:part name="hasTrustedProfilePersonReturn" type="xsd:boolean">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="verifySignedDocumentResponse">
+        <wsdl:part name="verifySignedDocumentReturn" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addDocumentToSigningRequest">
+        <wsdl:part name="doc" type="xsd:base64Binary">
+        </wsdl:part>
+        <wsdl:part name="successURL" type="xsd:string">
+        </wsdl:part>
+        <wsdl:part name="failureURL" type="xsd:string">
+        </wsdl:part>
+        <wsdl:part name="additionalInfo" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="WSSigningException">
+        <wsdl:part element="tns2:WSSigningException" name="fault">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSignedDocumentRequest">
+        <wsdl:part name="id" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSignedDocumentResponse">
+        <wsdl:part name="getSignedDocumentReturn" type="xsd:base64Binary">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="verifySignedDocumentRequest">
+        <wsdl:part name="document" type="xsd:base64Binary">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="hasTrustedProfilePersonRequest">
+        <wsdl:part name="tgsid" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="TPSigning">
+        <wsdl:operation name="hasTrustedProfileInstitution" parameterOrder="tgsid">
+            <wsdl:input message="intf:hasTrustedProfileInstitutionRequest" name="hasTrustedProfileInstitutionRequest">
+            </wsdl:input>
+            <wsdl:output message="intf:hasTrustedProfileInstitutionResponse" name="hasTrustedProfileInstitutionResponse">
+            </wsdl:output>
+            <wsdl:fault message="intf:WSSigningException" name="WSSigningException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="hasTrustedProfilePerson" parameterOrder="tgsid">
+            <wsdl:input message="intf:hasTrustedProfilePersonRequest" name="hasTrustedProfilePersonRequest">
+            </wsdl:input>
+            <wsdl:output message="intf:hasTrustedProfilePersonResponse" name="hasTrustedProfilePersonResponse">
+            </wsdl:output>
+            <wsdl:fault message="intf:WSSigningException" name="WSSigningException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addDocumentToSigning" parameterOrder="doc successURL failureURL additionalInfo">
+            <wsdl:input message="intf:addDocumentToSigningRequest" name="addDocumentToSigningRequest">
+            </wsdl:input>
+            <wsdl:output message="intf:addDocumentToSigningResponse" name="addDocumentToSigningResponse">
+            </wsdl:output>
+            <wsdl:fault message="intf:WSSigningException" name="WSSigningException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getSignedDocument" parameterOrder="id">
+            <wsdl:input message="intf:getSignedDocumentRequest" name="getSignedDocumentRequest">
+            </wsdl:input>
+            <wsdl:output message="intf:getSignedDocumentResponse" name="getSignedDocumentResponse">
+            </wsdl:output>
+            <wsdl:fault message="intf:WSSigningException" name="WSSigningException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="verifySignedDocument" parameterOrder="document">
+            <wsdl:input message="intf:verifySignedDocumentRequest" name="verifySignedDocumentRequest">
+            </wsdl:input>
+            <wsdl:output message="intf:verifySignedDocumentResponse" name="verifySignedDocumentResponse">
+            </wsdl:output>
+            <wsdl:fault message="intf:WSSigningException" name="WSSigningException">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TPSigningSoapBinding" type="intf:TPSigning">
+        <wsaw:UsingAddressing xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsdl:required="false"/>
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="hasTrustedProfileInstitution">
+            <soap:operation soapAction="hasTrustedProfileInstitution"/>
+            <wsdl:input name="hasTrustedProfileInstitutionRequest">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignInputPolicy"/>
+            </wsdl:input>
+            <wsdl:output name="hasTrustedProfileInstitutionResponse">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:output>
+            <wsdl:fault name="WSSigningException">
+                <soap:fault name="WSSigningException" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="hasTrustedProfilePerson">
+            <soap:operation soapAction="hasTrustedProfilePerson"/>
+            <wsdl:input name="hasTrustedProfilePersonRequest">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignInputPolicy"/>
+            </wsdl:input>
+            <wsdl:output name="hasTrustedProfilePersonResponse">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:output>
+            <wsdl:fault name="WSSigningException">
+                <soap:fault name="WSSigningException" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="addDocumentToSigning">
+            <soap:operation soapAction="addDocumentToSigning"/>
+            <wsdl:input name="addDocumentToSigningRequest">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignInputPolicy"/>
+            </wsdl:input>
+            <wsdl:output name="addDocumentToSigningResponse">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:output>
+            <wsdl:fault name="WSSigningException">
+                <soap:fault name="WSSigningException" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getSignedDocument">
+            <soap:operation soapAction="getSignedDocument"/>
+            <wsdl:input name="getSignedDocumentRequest">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignInputPolicy"/>
+            </wsdl:input>
+            <wsdl:output name="getSignedDocumentResponse">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:output>
+            <wsdl:fault name="WSSigningException">
+                <soap:fault name="WSSigningException" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="verifySignedDocument">
+            <soap:operation soapAction="verifySignedDocument"/>
+            <wsdl:input name="verifySignedDocumentRequest">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignInputPolicy"/>
+            </wsdl:input>
+            <wsdl:output name="verifySignedDocumentResponse">
+                <soap:body namespace="http://signing.ws.comarch.gov" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:output>
+            <wsdl:fault name="WSSigningException">
+                <soap:fault name="WSSigningException" use="literal"/>
+                <wsp:PolicyReference URI="#SecurityServiceSignOutputPolicy"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="TPSigningService">
+        <wsdl:port binding="intf:TPSigningSoapBinding" name="TPSigning">
+            <soap:address location="https://int.pz.gov.pl/pz-services/tpSigning"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

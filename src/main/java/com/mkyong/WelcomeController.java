@@ -3,15 +3,13 @@ package com.mkyong;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import egate.integracja.SignRespond;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pz.klasywsdl.TPSigning;
-import pz.klasywsdl.TPSigningService;
-import pz.klasywsdl.WSSigningException_Exception;
 
 @Controller
 @Slf4j
@@ -25,6 +23,9 @@ public class WelcomeController {
 			"</uslugodawcy>";
 	@Autowired
 	PodpisService podpisService;
+	@Autowired
+	EgateService egateService;
+
 	// inject via application.properties
 	@Value("${welcome.message:test}")
 	private String message = "Hello World";
@@ -47,6 +48,17 @@ public class WelcomeController {
 			log.info("Sukcess: "+url);
 			return "redirect:" + url;
 		}
+		return "welcome";
+	}
+
+	@RequestMapping(value = "/egate", method= RequestMethod.GET)
+	public String podpiszEgate(Map<String, Object> model) throws UnsupportedEncodingException {
+		String succes="http://localhost:8080";
+		byte[] xmlBase64bytes = xmlBase64.getBytes("UTF-8");
+		SignRespond signRespond = egateService.wykonajPodpisEgate(xmlBase64bytes,succes);
+		log.info(signRespond.getInfo());
+		log.info(signRespond.getUrl());
+		log.info("kod: "+signRespond.getCode());
 		return "welcome";
 	}
 }
